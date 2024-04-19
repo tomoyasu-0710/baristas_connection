@@ -25,9 +25,6 @@ SNSサイトや検索サイトでは幅広い人の意見などでも溢れて�
 - 投稿されたレシピの感想を知りたい時
 - 産地やコーヒー豆について感想や意見交換したい時
 
-## 実装機能リスト
-- https://docs.google.com/spreadsheets/d/1ELd-4mFs5VnpAAi5EdaDKzzOMDHTF5kvMaRM9aGTv1k/edit#gid=885378170
-
 ## 設計書
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
