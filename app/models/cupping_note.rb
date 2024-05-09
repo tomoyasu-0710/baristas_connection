@@ -1,0 +1,2 @@
+class CuppingNote < ApplicationRecord
+end
