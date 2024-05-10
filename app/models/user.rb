@@ -3,7 +3,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
-         has_one_attached :profile_image
-         
+  
+  has_one_attached :profile_image
+  
+  # group、group_userテーブルとの関連付け
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
+  
+  # commentsテーブルとの関連付け
+  has_many :comments, as: :commentable, dependent: :destroy
+  
+  # likesテーブルとの関連付け
+  has_many :likes, as: :likeabke, dependent: :destroy
+  
+  # cupping_noteテーブルとの関連付け
+  has_many :cupping_notes, dependent: :destroy
+  
+  # postsテーブルとの関連付け
+  has_many :posts, dependent: :destroy
 end
