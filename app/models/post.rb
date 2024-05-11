@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  userテーブルと関連付け
+  # userテーブルと関連付け
   belongs_to :user
   # commentテーブルと関連付け（ポリモーフィック）
   has_many :comments, as: :commentable, dependent: :destroy

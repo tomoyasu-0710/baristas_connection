@@ -2,10 +2,8 @@ class Group < ApplicationRecord
   # commentテーブルとの関連付け（ポリモーフィック）
   has_many :comments, as: :commentable, dependent: :destroy
   
-  # likeテーブルとの関連付け（ポリモーフィック）
-  has_many :likes, as: :likeable, dependent: :destroy
   
-  # userテーブルとの関連付け
+  # group_userテーブルとの関連付け
   belongs_to :owner, class_name: 'User'
   has_many :group_users, dependent: :destroy
   has_many :users, through: :group_users, source: :user

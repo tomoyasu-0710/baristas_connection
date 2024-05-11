@@ -1,5 +1,4 @@
-class Public::CuppingNotesController < ApplicationController
-  
+class Public::GroupsController < ApplicationController
   def new
   end
 
