@@ -4,5 +4,5 @@ class Comment < ApplicationRecord
   # 他モデルから利用可（ポリモーフィック）
   belongs_to :commentable, polymorphic: true
   # likeテーブルと関連付け（ポリモーフィック）
-  has_many :liks, as: :likeable
+  has_many :likes, as: :likeable
 end

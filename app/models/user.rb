@@ -11,10 +11,10 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users
   
   # commentsテーブルとの関連付け
-  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :comments, dependent: :destroy
   
   # likesテーブルとの関連付け
-  has_many :likes, as: :likeabke, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   # cupping_noteテーブルとの関連付け
   has_many :cupping_notes, dependent: :destroy

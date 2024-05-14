@@ -4,6 +4,7 @@ class Public::UsersController < ApplicationController
   end
 
   def show
+    @user = current_user
   end
 
   def edit
@@ -14,11 +15,11 @@ class Public::UsersController < ApplicationController
 
   def destroy
   end
-  
-  
+
+
   private
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-  
+
 end
