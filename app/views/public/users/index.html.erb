@@ -2,6 +2,7 @@
 <main>
   <h2>User info</h2>
   <div>
+    <%= image_tag @user.get_profile_image(100,100) %>
     <h3>name　<%= @user.name %></h3>　
     
     <h4>introduction</h4>
@@ -21,4 +22,6 @@
   <div>
     <%= link_to "カッピングノート", cupping_notes_path %>
   </div>
+ 
+  
 </main>

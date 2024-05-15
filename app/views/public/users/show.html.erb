@@ -1,2 +1,10 @@
 <h1>マイページ</h1>
 
+<div>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <%= @user.name %>
+  <h3>自己紹介</h3>
+  <%= @user.introduction %>
+  <%= link_to "プロフィール編集", edit_user_path(@user) %>
+</div>
+

@@ -5,4 +5,6 @@ class Post < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   # likeテーブルと関連付け（ポリモーフィック
   has_many :liks, as: :likeable, dependent: :destroy
+  
+  has_one_attached :image
 end
