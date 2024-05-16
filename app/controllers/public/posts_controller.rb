@@ -8,6 +8,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def create
@@ -30,4 +31,13 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :image)
   end
+  
+  # def get_image
+  #   if image.attached?
+  #     image.variant(resize_to_limit: [width, height]).processed
+  #   else
+  #     nil
+  #   end
+  # end
+  
 end

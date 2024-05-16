@@ -1,2 +1,13 @@
-<h1>Public::Posts#index</h1>
+<h1>投稿一覧</h1>
 
+<div>
+  <% @post.each do |post| %>
+    <% if post.image.present? %>
+      <%= image_tag post.get_image %>
+    <% else %>
+      <!-- 画像が添付されていない場合の表示の記述 -->
+      <%= post.title %>
+      <%= post.body %>
+    <% end %>
+  <% end %>
+</div>

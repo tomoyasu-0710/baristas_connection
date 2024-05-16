@@ -7,4 +7,16 @@ class Post < ApplicationRecord
   has_many :liks, as: :likeable, dependent: :destroy
   
   has_one_attached :image
+  
+  
+  def get_image
+    if image.attached?
+      image.variant(resize_to_limit: [100,100]).processed
+    else
+      nil
+    end
+  end
+  
 end
+
+
