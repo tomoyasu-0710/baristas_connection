@@ -9,6 +9,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user
   end
 
   def create
@@ -19,12 +20,17 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    is_matching_login_user
   end
 
   def update
   end
 
   def destroy
+    is_matching_login_user
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to posts_path
   end
   
   private
@@ -32,12 +38,12 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:title, :body, :image)
   end
   
-  # def get_image
-  #   if image.attached?
-  #     image.variant(resize_to_limit: [width, height]).processed
-  #   else
-  #     nil
-  #   end
-  # end
+  def is_matching_login_user
+    @post = Post.find(params[:id])
+    unless @post.user_id == current_user.id
+      redirect_to posts_path
+    end
+  end
+  
   
 end

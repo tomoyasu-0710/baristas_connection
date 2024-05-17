@@ -4,9 +4,11 @@
   <% @post.each do |post| %>
     <% if post.image.present? %>
       <%= image_tag post.get_image %>
+      <%= link_to post.title, post_path(post) %>
+      <%= post.body %>
     <% else %>
       <!-- 画像が添付されていない場合の表示の記述 -->
-      <%= post.title %>
+      <%=link_to post.title, post_path(post) %>
       <%= post.body %>
     <% end %>
   <% end %>
