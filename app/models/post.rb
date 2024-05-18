@@ -8,13 +8,16 @@ class Post < ApplicationRecord
   
   has_one_attached :image
   
-  
   def get_image
     if image.attached?
       image.variant(resize_to_limit: [300,300]).processed
     else
       nil
     end
+  end
+  
+  def liked_by?(user)
+    self.likes.exists?(user_id: user.id)
   end
   
 end
