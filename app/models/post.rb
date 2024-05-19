@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   # commentテーブルと関連付け（ポリモーフィック）
   has_many :comments, as: :commentable, dependent: :destroy
   # likeテーブルと関連付け（ポリモーフィック
-  has_many :likes, as: :likeable, dependent: :destroy
+  has_many :likes, :as => :likeable, dependent: :destroy
   
   has_one_attached :image
   
