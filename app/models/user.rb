@@ -3,25 +3,27 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   has_one_attached :profile_image
-  
+
   # group、group_userテーブルとの関連付け
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
-  
+
   # commentsテーブルとの関連付け
   has_many :comments, dependent: :destroy
-  
+
   # likesテーブルとの関連付け
   has_many :likes, dependent: :destroy
-  
+
+  has_many :like_posts, through: :likes, source: :likeable, source_type: "Post"
+
   # cupping_noteテーブルとの関連付け
   has_many :cupping_notes, dependent: :destroy
-  
+
   # postsテーブルとの関連付け
   has_many :posts, dependent: :destroy
-  
+
   # ゲストログイン用のメソッド
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
@@ -29,7 +31,7 @@ class User < ApplicationRecord
       user.name = "ゲスト"
     end
   end
-  
+
   def get_profile_image(width, height)
   unless profile_image.attached?
     file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -37,6 +39,6 @@ class User < ApplicationRecord
   end
   profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
-  
+
+
 end

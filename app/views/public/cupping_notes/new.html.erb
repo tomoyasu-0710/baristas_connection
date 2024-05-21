@@ -1,0 +1,19 @@
+<h1>カッピングノート作成</h1>
+
+<%= form_with model: @cupping_note, method: :post do |f| %>
+
+<h3>サンプル名</h3>
+<%= f.text_field :sample_name %>
+
+<h3>内容</h3>
+<label for="temp">ロースト</label><br />
+<input type="range" id="tempB" name="roast" list="values" />
+
+<datalist id="values">
+  <option value="0" label="浅煎り"></option>
+  <option value="50" label="中煎り"></option>
+  <option value="100" label="深煎り"></option>
+</datalist>
+
+
+<% end %>

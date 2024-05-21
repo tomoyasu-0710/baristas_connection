@@ -1,0 +1,5 @@
+userのlike投稿一覧
+<% @posts.each do |post| %>
+  <p><%=link_to post.title, post_path(post) %></p>
+  <p><%= post.body %></p>
+<% end %>

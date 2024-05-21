@@ -2,14 +2,18 @@
 
 <div>
   <% @post.each do |post| %>
-    <% if post.image.present? %>
-      <%= image_tag post.get_image %>
-      <%= link_to post.title, post_path(post) %>
-      <%= post.body %>
-    <% else %>
-      <!-- 画像が添付されていない場合の表示の記述 -->
-      <%=link_to post.title, post_path(post) %>
-      <%= post.body %>
-    <% end %>
+  <% if post.image.present? %>
+  <%= image_tag post.user.get_profile_image(100,100) %>
+  <%= post.user.name %>
+  <%= link_to post.title, post_path(post) %>
+  <%= post.body %>
+  <%= image_tag post.get_image %>
+  <% else %>
+  <!-- 画像が添付されていない場合の表示の記述 -->
+  <%= image_tag post.user.get_profile_image(100,100) %>
+  <%= post.user.name %>
+  <%=link_to post.title, post_path(post) %>
+  <%= post.body %>
+  <% end %>
   <% end %>
 </div>
