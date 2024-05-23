@@ -7,18 +7,123 @@
 
 <h3>内容</h3>
 
-<%= label_tag 'temp', 'ロースト' %><br/>
-<%= range_field_tag 'roast', min: 1, max: 3, step: 1, list: 'values' %><br />
+<style>
+  datalist {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    writing-mode: vertical-lr;
+    width: 200px;
+  }
+  
+  option {
+    padding: 0;
+  }
+  
+  input[type="range"] {
+    width: 200px;
+    margin: 0;
+  }
+  
+  
+</style>
 
-<datalist id="values">
-  <option value="1" label="浅煎り">浅煎り</option>
-  <option value="2" label="中煎り">中煎り</option>
-  <option value="3" label="深煎り">深煎り</option>
-</datalist>
+  <%= f.label :"ロースト" %><br/>
+  <%= f.range_field :roast, in: 1..3, step: 1, id: "roast", list: "roast_values" %> <!-- レンジフォーム -->
 
-<%= f.label :dry, "ドライ" %><br/>
-<% range_values = (1..3).to_a %>
-<%= f.range_field :dry, in: range_values, labels: range_values.join(", ") %>
+  <datalist id="roast_values">
+    <option value="1" label="浅煎り"></option>
+    <option value="2" label="中煎り"></option>
+    <option value="3" label="深煎り"></option>
+  </datalist>
 
+  <%= f.label :"ドライ" %><br/>
+  <%= f.range_field :dry, in: 1..3, step: 1, id: "dry", list: "dry_values" %> <!-- レンジフォーム -->
+
+<datalist id="dry_values"><br/>
+    <option value="1" label="1"></option>
+    <option value="2" label="2"></option>
+    <option value="3" label="3"></option>
+  </datalist>
+
+  <%= f.label :"クラスト" %><br/>
+  <%= f.range_field :crust, in: 1..3, step: 1, id: "crust", list: "crust_values" %> <!-- レンジフォーム -->
+
+<datalist id="crust_values">
+    <option value="1" label="1"></option>
+    <option value="2" label="2"></option>
+    <option value="3" label="3"></option>
+  </datalist>
+
+  <%= f.label :"ブレイク" %><br/>
+  <%= f.range_field :break, in: 1..3, step: 1, id: "break", list: "break_values"  %> <!-- レンジフォーム -->
+
+<datalist id="break_values">
+    <option value="1" label="1"></option>
+    <option value="2" label="2"></option>
+    <option value="3" label="3"></option>
+  </datalist>
+
+<%= f.label :flavor %>
+  <%= f.radio_button :flavor, 1 %> 3
+  <%= f.radio_button :flavor, 2 %> 4
+  <%= f.radio_button :flavor, 3 %> 5
+  <%= f.radio_button :flavor, 4 %> 6
+  <%= f.radio_button :flavor, 5 %> 7
+  <%= f.radio_button :flavor, 6 %> 8 <!-- ラジオボタン -->
+
+  <%= f.label :after_taste %><br/>
+  <%= f.radio_button :after_taste, 1 %> 3
+  <%= f.radio_button :after_taste, 2 %> 4
+  <%= f.radio_button :after_taste, 3 %> 5
+  <%= f.radio_button :after_taste, 4 %> 6
+  <%= f.radio_button :after_taste, 5 %> 7
+  <%= f.radio_button :after_taste, 6 %> 8 <!-- ラジオボタン -->
+
+  <%= f.label :acidity %><br/>
+  <%= f.radio_button :acidity, 1 %> 3
+  <%= f.radio_button :acidity, 2 %> 4
+  <%= f.radio_button :acidity, 3 %> 5
+  <%= f.radio_button :acidity, 4 %> 6
+  <%= f.radio_button :acidity, 5 %> 7
+  <%= f.radio_button :acidity, 6 %> 8 <!-- ラジオボタン -->
+
+  <%= f.label :mouth_feel %><br/>
+  <%= f.radio_button :mouth_feel, 1 %> 3
+  <%= f.radio_button :mouth_feel, 2 %> 4
+  <%= f.radio_button :mouth_feel, 3 %> 5
+  <%= f.radio_button :mouth_feel, 4 %> 6
+  <%= f.radio_button :mouth_feel, 5 %> 7
+  <%= f.radio_button :mouth_feel, 6 %> 8 <!-- ラジオボタン -->
+
+  <%= f.label :clean_cup %><br/>
+  <%= f.radio_button :clean_cup, 1 %> 3
+  <%= f.radio_button :clean_cup, 2 %> 4
+  <%= f.radio_button :clean_cup, 3 %> 5
+  <%= f.radio_button :clean_cup, 4 %> 6
+  <%= f.radio_button :clean_cup, 5 %> 7
+  <%= f.radio_button :clean_cup, 6 %> 8<!-- ラジオボタン -->
+
+  <%= f.label :sweetness %><br/>
+  <%= f.radio_button :sweetness, 1 %> 3
+  <%= f.radio_button :sweetness, 2 %> 4
+  <%= f.radio_button :sweetness, 3 %> 5
+  <%= f.radio_button :sweetness, 4 %> 6
+  <%= f.radio_button :sweetness, 5 %> 7
+  <%= f.radio_button :sweetness, 6 %> 8 <!-- ラジオボタン -->
+
+  <%= f.label :harmony %><br/>
+  <%= f.radio_button :harmony, 1 %> 3
+  <%= f.radio_button :harmony, 2 %> 4
+  <%= f.radio_button :harmony, 3 %> 5
+  <%= f.radio_button :harmony, 4 %> 6
+  <%= f.radio_button :harmony, 5 %> 7
+  <%= f.radio_button :harmony, 6 %> 8 <!-- ラジオボタン -->
+
+
+<div class="total-form">
+  <label>合計:</label>
+  <input type="text" id="total" readonly value="<%= @total.to_i + 36 %>">
+</div>
 
 <% end %>
