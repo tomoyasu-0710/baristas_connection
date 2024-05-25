@@ -8,4 +8,15 @@ class CuppingNote < ApplicationRecord
   # flavor_tagと関連付け
   has_many :flavor_tags, depenndent: :destroy
   has_many :flavors, through: :flavor_tags
+  
+  has_one_attached :image
+  
+  def get_image
+    if image.attached?
+      image.variant(resize_to_limit: [300,300]).processed
+    else
+      nil
+    end
+  end
+  
 end

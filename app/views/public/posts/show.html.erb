@@ -1,4 +1,8 @@
 <h1>投稿内容</h1>
+
+<% @post_tags.each do |tag| %>
+  <%= link_to tag.name,search_tag_path(post_tag_id: tag.id) %><%="(#{tag.posts.count})" %><% end %>
+
 <div>
   <%= image_tag @user.get_profile_image(100,100) %>
   <%= link_to @user.name, user_path(@user) %>
@@ -11,21 +15,21 @@
   <% end %>
 
   <% if @post.user == current_user %>
-  <%= link_to "Edit", edit_post_path(@post) %>
-  <%= link_to "Destroy", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <%= link_to "Edit", edit_post_path(@post) %>
+    <%= link_to "Destroy", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 
   <% if @post.liked_by?(current_user) %>
     <p>
       <%= link_to like_path(post_id: @post), method: :delete do %>
-      ♥<%= @post.likes.count %> いいね
+        ♥<%= @post.likes.count %> いいね
       <% end %>
     </p>
     <% else %>
     <p>
       <%= link_to likes_path(post_id: @post), method: :post do %>
-      ♡<%= @post.likes.count %>いいね
-    <% end %>
+        ♡<%= @post.likes.count %>いいね
+      <% end %>
     </p>
   <% end %>
 </div>

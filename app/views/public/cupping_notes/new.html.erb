@@ -131,8 +131,17 @@
 
 
 <div class="total-form">
-  <label>合計:</label>
+  <label>合計+36:</label>
   <input type="text" id="total" readonly value="<%= @total.to_i + 36 %>">
 </div>
+
+  <%= f.label :画像 %>
+  <%= f.file_field :image, accept: "image/*" %>
+  
+  <%= f.label :メモ %>
+  <%= f.text_area :memo %>
+  
+  <%= f.submit '投稿' %>
+  
 
 <% end %>
