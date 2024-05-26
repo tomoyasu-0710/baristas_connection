@@ -2,40 +2,43 @@ class Public::PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @post = current_user.posts.new
   end
 
   def index
-    @post = Post.all
-    @post_tag=PostTag.all
+    @posts = Post.all
+    @tag_list = Tag.all
   end
 
   def show
+    @user = User.find(params[:id])
     @post = Post.find(params[:id])
-    @user = @post.user
     @post_tags = @post.tags
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    tag_list=params[:post][:name].split(',')
-  if @post.save
-    @post.save_tag(tag_list)
-    redirect_to posts_path,notice:'投稿完了しました'
-  else
-    render :new
-  end
+    @post = current_user.posts.new(post_params)
+    tag_list = params[:post][:tag_name].split(',')
+    if @post.save
+      @post.save_tag(tag_list)
+      redirect_to posts_path
+    else
+      redirect_to new_post_path
+    end
   end
 
   def edit
-    
     is_matching_login_user
+    
+    @post = Post.find(params[:id])
+    # tagの編集
+    @tag_list=@post.tags.pluck(:tag_name).join(nil)
   end
 
   def update
     @post = Post.find(params[:id])
      # 入力されたタグを受け取る
-    tag_list = params[:post][:name].split(',')
+    tag_list = params[:post][:tag_name].split(',')
     if  @post.update(post_params)
       # このpost_idに紐づいていたタグを@oldに入れる
       @old_relations=PostTag.where(post_id: @post.id)
@@ -83,4 +86,5 @@ class Public::PostsController < ApplicationController
     end
     end
   end
+  
 end

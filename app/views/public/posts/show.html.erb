@@ -1,8 +1,11 @@
 <h1>投稿内容</h1>
 
 <% @post_tags.each do |tag| %>
-  <%= link_to tag.name,search_tag_path(post_tag_id: tag.id) %><%="(#{tag.posts.count})" %><% end %>
-
+  <% if tag.posts.count > 0 %>
+    #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+    <%= "(#{tag.posts.count})" %>
+  <% end %>
+<% end %>
 <div>
   <%= image_tag @user.get_profile_image(100,100) %>
   <%= link_to @user.name, user_path(@user) %>

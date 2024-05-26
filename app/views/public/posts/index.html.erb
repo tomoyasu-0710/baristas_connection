@@ -2,13 +2,13 @@
 
 <div>
   <!--タグリスト-->
-<% @post_tag.each do |tag|%>
-<%= link_to tag.name, search_tag_path(post_tag_id: tag.id) %>
+<% @tag_list.each do |list| %>
+<%= link_to list.tag.name, tag_posts_path(post_tag_id: tag.id) %>
 <%="(#{list.posts.count})" %>
 <% end %>
 
   
-  <% @post.each do |post| %>
+  <% @posts.each do |post| %>
   <i class="fa-solid fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
   <% if post.image.present? %>
   <%= image_tag post.user.get_profile_image(100,100) %>
@@ -16,7 +16,13 @@
   <%= link_to post.title, post_path(post) %>
   <%= post.body %>
   <%= image_tag post.get_image %>
+  <% @posts.each do |post| %> 
+      #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+  <% end %>
   <% else %>
+  <% @posts.each do |post| %> 
+      #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+  <% end %>
   <!-- 画像が添付されていない場合の表示の記述 -->
   <%= image_tag post.user.get_profile_image(100,100) %>
   <%= post.user.name %>
