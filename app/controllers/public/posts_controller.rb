@@ -1,7 +1,6 @@
 class Public::PostsController < ApplicationController
-  
+
   def new
-    @post = Post.new
     @post = current_user.posts.new
   end
 
@@ -11,9 +10,9 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @post = Post.find(params[:id])
     @post_tags = @post.tags
+    @user = @post.user
   end
 
   def create
@@ -29,7 +28,7 @@ class Public::PostsController < ApplicationController
 
   def edit
     is_matching_login_user
-    
+
     @post = Post.find(params[:id])
     # tagの編集
     @tag_list=@post.tags.pluck(:tag_name).join(nil)
@@ -45,14 +44,14 @@ class Public::PostsController < ApplicationController
       # それらを取り出し、消す。消し終わる
       @old_relations.each do |relation|
       relation.delete
-      end  
+      end
       @post.save_tag(tag_list)
       redirect_to post_path(@post.id), notice: '更新完了しました'
     else
         render :edit
     end
   end
-  
+
 
   def destroy
     is_matching_login_user
@@ -61,21 +60,18 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
   
-  def search_tag
-    #検索結果画面でもタグ一覧表示
-    @tag_list=Tag.all
-　　#検索されたタグを受け取る
-    @tag=Tag.find(params[:tag_id])
-　　#検索されたタグに紐づく投稿を表示
-    @posts=@tag.posts.page(params[:page]).per(10)
+  def search
+    @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+    @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
+    @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
   end
-  
+
   private
-  
+
   def post_params
     params.require(:post).permit(:title, :body, :image)
   end
-  
+
   def is_matching_login_user
     @post = Post.find(params[:id])
     unless @post.user_id == current_user.id
@@ -86,5 +82,5 @@ class Public::PostsController < ApplicationController
     end
     end
   end
-  
+
 end

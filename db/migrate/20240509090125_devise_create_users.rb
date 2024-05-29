@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
       
       # 名前保存用のカラム
-      t.string :name
+      t.string :name, null: false
       # 自己紹介文保存のカラム
       t.string :introduction
 
