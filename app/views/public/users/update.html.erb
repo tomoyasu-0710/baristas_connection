@@ -1,2 +1,36 @@
 <h1>Public::Users#update</h1>
 <p>Find me in app/views/public/users/update.html.erb</p>
+
+<div>
+  <!--タグリスト-->
+  <h3>タグリスト</h3>
+  <% @tag_list.each do |list| %>
+  #<%= link_to list.tag_name, tag_posts_path(tag_id: list.id) %>
+  <%= "(#{list.posts.count})" %>
+<% end %>
+
+
+  <% @posts.each do |post| %> 
+        #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+      <% end %>
+  <% @posts.each do |post| %>
+    <i class="fa-solid fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
+    <% if post.image.present? %>
+      <%= image_tag post.user.get_profile_image(100,100) %>
+      <%= post.user.name %>
+      <%= link_to post.title, post_path(post) %>
+      <%= post.body %>
+      <%= image_tag post.get_image %>
+    <% else %>
+    
+      <% @posts.each do |post| %> 
+        #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+      <% end %>
+      <!-- 画像が添付されていない場合の表示の記述 -->
+      <%= image_tag post.user.get_profile_image(100,100) %>
+      <%= post.user.name %>
+      <%=link_to post.title, post_path(post) %>
+      <%= post.body %>
+    <% end %>
+  <% end %>
+</div>

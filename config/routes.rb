@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: 'public/homes#top'
+  
+  get "/search", to: "public/searches#search"
 
   devise_for :admin, skip: [:registrations] ,controllers: {
     sessions: "admin/sessions"
@@ -31,4 +33,5 @@ Rails.application.routes.draw do
     resources :cupping_notes
     get 'homes/about'
   end
-end
+  end
+

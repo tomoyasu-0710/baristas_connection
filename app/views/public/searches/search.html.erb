@@ -1,0 +1,33 @@
+<% if @model == 'post' %>
+<h3>posts search for "<%= @content %>"</h3>
+
+  <% @records.each do |record| %>
+    <% if record.image.present? %>
+      <%= image_tag record.user.get_profile_image(100, 100) %>
+      <%= record.user.name %>
+      <%= link_to record.title, post_path(record) %>
+      <%= record.body %>
+      <%= image_tag record.get_image %>
+    <% else %>
+      <%= image_tag record.user.get_profile_image(100, 100) %>
+      <%= record.user.name %>
+      <%= link_to record.title, post_path(record) %>
+      <%= record.body %>
+    <% end %>
+
+    <% record.tags.each do |tag| %>
+      <i class="fa-solid fa-tag"><%= tag.name %></i>
+      <%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+    <% end %>
+  <% end %>
+
+<% elsif @model == 'cupping_note' %>
+    <h3>cupping_notes search for "<%= @content %>"</h3>
+  <% @cupping_note.each do |cupping_note| %>
+    <% if cupping_note.image.present? %>
+    <%= image_tag post.user.get_profile_image(100,100) %>
+    <%= cupping_note.user.name %>
+    <%= link_to cupping_note.sample_name %>
+    <% end %>
+  <% end%>
+<% end %>

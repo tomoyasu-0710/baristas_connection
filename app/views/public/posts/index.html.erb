@@ -1,35 +1,34 @@
 <h1>投稿一覧</h1>
 
+<h3>タグリスト</h3>
 <div>
-  <!--タグリスト-->
-  <h3>タグリスト</h3>
   <% @tag_list.each do |list| %>
-  #<%= link_to list.tag_name, tag_posts_path(tag_id: list.id) %>
-  <%= "(#{list.posts.count})" %>
-<% end %>
+    <%= link_to tag_posts_path(tag_id: list.id) do %>
+      <i class="fa-solid fa-tag"><%= list.tag_name %></i>
+      <%= "(#{list.posts.count})" %>
+    <% end %>
+  <% end %>
+</div>
 
-
-  <% @posts.each do |post| %> 
-        #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
-      <% end %>
+<div>
   <% @posts.each do |post| %>
-    <i class="fa-solid fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
     <% if post.image.present? %>
-      <%= image_tag post.user.get_profile_image(100,100) %>
+      <%= image_tag post.user.get_profile_image(100, 100) %>
       <%= post.user.name %>
       <%= link_to post.title, post_path(post) %>
       <%= post.body %>
       <%= image_tag post.get_image %>
     <% else %>
-    
-      <% @posts.each do |post| %> 
-        #<%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
-      <% end %>
-      <!-- 画像が添付されていない場合の表示の記述 -->
-      <%= image_tag post.user.get_profile_image(100,100) %>
+      <%= image_tag post.user.get_profile_image(100, 100) %>
       <%= post.user.name %>
-      <%=link_to post.title, post_path(post) %>
+      <%= link_to post.title, post_path(post) %>
       <%= post.body %>
+  <% end %>
+
+  <% post.tags.each do |tag| %>
+    <%= link_to tag_posts_path(tag_id: tag.id) do %>
+      <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
     <% end %>
+  <% end %>
   <% end %>
 </div>

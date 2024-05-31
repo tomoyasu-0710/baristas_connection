@@ -46,6 +46,10 @@
         <%= link_to "ゲスト", users_guest_sign_in_path ,method: :post %>
       </li>
       <% end %>
+      
+      <div class="d-flex justify-content-center mb-2">
+        <%= render "public/searches/form" %>
+      </div>
     </header>
     <%= yield %>
   </body>

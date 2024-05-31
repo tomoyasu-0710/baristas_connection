@@ -8,9 +8,9 @@ class CuppingNote < ApplicationRecord
   # flavor_tagと関連付け
   has_many :flavor_tags, depenndent: :destroy
   has_many :flavors, through: :flavor_tags
-  
+
   has_one_attached :image
-  
+
   def get_image
     if image.attached?
       image.variant(resize_to_limit: [300,300]).processed
@@ -18,5 +18,17 @@ class CuppingNote < ApplicationRecord
       nil
     end
   end
-  
+
+  def self.search_for(content, method)
+    if method == 'perfect'
+      where(sumple_name: content)
+    elsif method == 'forward'
+      where('sumple_name LIKE ?', content + '%')
+    elsif method == 'backward'
+      where('sumple_name LIKE ?', '%' + content)
+    else
+      where('sumple_name LIKE ?', '%' + content + '%')
+    end
+  end
+
 end

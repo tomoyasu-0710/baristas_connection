@@ -2,11 +2,10 @@
 
 <div>
   <% @cupping_note.each do |cupping_note| %>
-  <% if cupping_note.image.present? %>
-  <%= image_tag post.user.get_profile_image(100,100) %>
-  <%= cupping_note.user.name %>
-  <%= link_to cupping_note.sample_name %>
-  
-  <% end %>
+    <% if cupping_note.image.present? %>
+    <%= image_tag post.user.get_profile_image(100,100) %>
+    <%= cupping_note.user.name %>
+    <%= link_to cupping_note.sample_name %>
+    <% end %>
   <% end%>
 </div>
