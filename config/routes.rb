@@ -17,20 +17,25 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resources :posts
+    resources :posts do
+      resources :comments, only: [:create, :destroy]
+    end
     resources :tags do
-    get 'posts', to: 'posts#search'
-  end
+      get 'posts', to: 'posts#search'
+    end
     resources :likes, only: [:create, :destroy]
-    resources :comments
-    resources :groups
+    resources :groups do
+      resources :comments, only: [:create, :destroy]
+    end
     resources :users do
       get :posts
       get :cupping_notes
       get :groups
       get :likes
     end
-    resources :cupping_notes
+    resources :cupping_notes do
+      resources :comments, only: [:create, :destroy]
+    end
     get 'homes/about'
   end
   end
