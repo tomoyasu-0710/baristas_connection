@@ -6,7 +6,7 @@ class CuppingNote < ApplicationRecord
   # likeテーブルと関連付け（ポリモーフィック)
   has_many :likes, as: :likeable
   # flavor_tagと関連付け
-  has_many :flavor_tags, depenndent: :destroy
+  has_many :flavor_tags, dependent: :destroy
   has_many :flavors, through: :flavor_tags
 
   has_one_attached :image

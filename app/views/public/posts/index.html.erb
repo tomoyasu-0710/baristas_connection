@@ -23,12 +23,12 @@
       <%= post.user.name %>
       <%= link_to post.title, post_path(post) %>
       <%= post.body %>
-  <% end %>
-
-  <% post.tags.each do |tag| %>
-    <%= link_to tag_posts_path(tag_id: tag.id) do %>
-      <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
     <% end %>
-  <% end %>
+
+    <% post.tags.each do |tag| %>
+      <%= link_to tag_posts_path(tag_id: tag.id) do %>
+        <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
+      <% end %>
+    <% end %>
   <% end %>
 </div>

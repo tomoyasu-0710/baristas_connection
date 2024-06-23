@@ -1,15 +1,15 @@
 class Public::CommentsController < ApplicationController
-  
-  before_action :set_commentable, only: [:show, :create, :destroy]
-  
   def index
   end
 
   def show
+    @commentable = find_commentable
   end
 
   def create
+    @commentable = find_commentable
     @comment = @commentable.comments.build(comment_params)
+    @comment.user = current_user
     if @comment.save
       redirect_to @commentable, notice: "コメントしました。"
     else
@@ -18,25 +18,26 @@ class Public::CommentsController < ApplicationController
   end
 
   def destroy
-     @comment = @commentable.comments.find(params[:id])
+    @commentable = find_commentable
+    @comment = @commentable.comments.find(params[:id])
     @comment.destroy
     redirect_to @commentable, notice: "コメントを削除しました。"
   end
-  
-   private
 
-  def set_commentable
+  private
+
+  def find_commentable
     if params[:post_id]
-      @commentable = Post.find(params[:post_id])
+      Post.find(params[:post_id])
     elsif params[:group_id]
-      @commentable = Group.find(params[:group_id])
+      Group.find(params[:group_id])
     elsif params[:cupping_note_id]
-      @commentable = CuppingNote.find(params[:cupping_note_id])
+      CuppingNote.find(params[:cupping_note_id])
     end
   end
 
   def comment_params
     params.require(:comment).permit(:comment)
   end
-  
+
 end

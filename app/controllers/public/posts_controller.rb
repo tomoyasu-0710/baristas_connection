@@ -11,8 +11,11 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
     @post_tags = @post.tags
     @user = @post.user
+    @commentable = @post
+    @comment = Comment.new
   end
 
   def create
@@ -59,7 +62,7 @@ class Public::PostsController < ApplicationController
     post.destroy
     redirect_to posts_path
   end
-  
+
   def search
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
     @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
@@ -82,5 +85,4 @@ class Public::PostsController < ApplicationController
     end
     end
   end
-
 end
