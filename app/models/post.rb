@@ -8,9 +8,9 @@ class Post < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   # likeテーブルと関連付け（ポリモーフィック
   has_many :likes, :as => :likeable, dependent: :destroy
-  
+
   has_one_attached :image
-  
+
   def get_image
     if image.attached?
       image.variant(resize_to_limit: [300,300]).processed
@@ -18,13 +18,13 @@ class Post < ApplicationRecord
       nil
     end
   end
-  
+
   def liked_by?(user)
     self.likes.exists?(user_id: user.id)
   end
-  
+
   def save_tag(sent_tags)
-    current_tags = self.tags.pluck(:tagname) unless self.tags.nil?
+    current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
 
@@ -37,7 +37,7 @@ class Post < ApplicationRecord
       self.tags << new_post_tag
     end
   end
-  
+
   def self.search_for(content, method)
     if method == 'perfect'
       Post.where(title: content)
@@ -49,11 +49,11 @@ class Post < ApplicationRecord
       Post.where('title LIKE ?', '%' + content + '%')
     end
   end
-  
+
   def name
     self.tag_name
   end
-  
+
 end
 
 
