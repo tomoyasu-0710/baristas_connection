@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, authentication_keys: [:name]
 
   has_one_attached :profile_image
 
@@ -23,6 +23,10 @@ class User < ApplicationRecord
 
   # postsテーブルとの関連付け
   has_many :posts, dependent: :destroy
+
+  def self.find_for_database_authentication(warden_conditions)
+    find_by(name: warden_conditions[:name])
+  end
 
   # ゲストログイン用のメソッド
   def self.guest

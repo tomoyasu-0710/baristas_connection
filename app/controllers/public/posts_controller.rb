@@ -14,7 +14,6 @@ class Public::PostsController < ApplicationController
     @comments = @post.comments
     @post_tags = @post.tags
     @user = @post.user
-    @commentable = @post
     @comment = Comment.new
   end
 

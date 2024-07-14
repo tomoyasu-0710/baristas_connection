@@ -20,8 +20,12 @@ class Public::CommentsController < ApplicationController
   def destroy
     @commentable = find_commentable
     @comment = @commentable.comments.find(params[:id])
-    @comment.destroy
-    redirect_to @commentable, notice: "コメントを削除しました。"
+     if current_user.id == @comment.user.id
+       @comment.destroy
+     redirect_to @commentable, notice: "コメントを削除しました。"
+     else
+       render "posts/show"
+     end
   end
 
   private
@@ -39,5 +43,4 @@ class Public::CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:comment)
   end
-
 end

@@ -16,8 +16,9 @@
     <% end %>
 
     <% record.tags.each do |tag| %>
-      <i class="fa-solid fa-tag"><%= tag.name %></i>
-      <%= link_to tag.tag_name, tag_posts_path(tag_id: tag.id) %>
+      <%= link_to tag_posts_path(tag_id: tag.id) do %>
+        <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
+      <% end %>
     <% end %>
   <% end %>
 

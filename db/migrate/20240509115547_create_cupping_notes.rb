@@ -14,6 +14,7 @@ class CreateCuppingNotes < ActiveRecord::Migration[6.1]
       t.integer :sweetness
       t.integer :harmony
       t.string :memo
+      t.integer :over_all
       t.integer :user_id, null: false
       t.timestamps
     end

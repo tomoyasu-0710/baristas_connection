@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   get "/search", to: "public/searches#search"
 
-  devise_for :admin, skip: [:registrations] ,controllers: {
+  devise_for :admin, skip: [:registrations, :password] ,controllers: {
     sessions: "admin/sessions"
   }
 
@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
+  
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
+    resources :comments, only: [:index, :destroy]
+  end
 
   devise_scope :user do
     post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
