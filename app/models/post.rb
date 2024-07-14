@@ -24,7 +24,7 @@ class Post < ApplicationRecord
   end
   
   def save_tag(sent_tags)
-    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    current_tags = self.tags.pluck(:tagname) unless self.tags.nil?
     old_tags = current_tags - sent_tags
     new_tags = sent_tags - current_tags
 
