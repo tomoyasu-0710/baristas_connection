@@ -42,10 +42,25 @@
   <%= f.submit "コメントする" %>
   <% end %>
 </div>
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 <div>
   <% @comments.each do |comment| %>
-  <%= image_tag comment.user.get_profile_image(100,100) %>
-    <%= comment.comment %>
-    <%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% if comment.user == current_user %>
+      <%= image_tag comment.user.get_profile_image(100,100) %>
+      <%= comment.comment %>
+      <%= link_to "削除", post_comment_path(@post, comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    <% else %>
+      <%= image_tag comment.user.get_profile_image(100,100) %>
+      <%= comment.comment %>
+    <% end %>
   <% end %>
 </div>

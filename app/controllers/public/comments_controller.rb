@@ -20,12 +20,12 @@ class Public::CommentsController < ApplicationController
   def destroy
     @commentable = find_commentable
     @comment = @commentable.comments.find(params[:id])
-     if current_user.id == @comment.user.id
-       @comment.destroy
+    if current_user.id == @comment.user.id
+      @comment.destroy
      redirect_to @commentable, notice: "コメントを削除しました。"
-     else
-       render "posts/show"
-     end
+    else
+      render "posts/show"
+    end
   end
 
   private
