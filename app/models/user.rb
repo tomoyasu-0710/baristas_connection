@@ -48,6 +48,18 @@ end
   end
   profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def self.search_for(content, method)
+    if method == 'perfect'
+      where(name: content)
+    elsif method == 'forward'
+      where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      where('name LIKE ?', '%' + content)
+    else
+      where('name LIKE ?', '%' + content + '%')
+    end
+  end
 
 
 end

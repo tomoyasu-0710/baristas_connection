@@ -1,34 +1,69 @@
-<% if @model == 'post' %>
-<h3>posts search for "<%= @content %>"</h3>
 
-  <% @records.each do |record| %>
-    <% if record.image.present? %>
-      <%= image_tag record.user.get_profile_image(100, 100) %>
-      <%= record.user.name %>
-      <%= link_to record.title, post_path(record) %>
-      <%= record.body %>
-      <%= image_tag record.get_image %>
-    <% else %>
-      <%= image_tag record.user.get_profile_image(100, 100) %>
-      <%= record.user.name %>
-      <%= link_to record.title, post_path(record) %>
-      <%= record.body %>
-    <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col mt-5 ">
+      <% if @model == 'post' %>
+        <h3>posts search for"<%= @content %>"</h3>
+        <table class="table table-hover table-inverse">
+          <thead>
+            <tr>
+              <th>プロフィール画像</th>
+              <th>投稿者名</th>
+              <th>タイトル</th>
+              <th>本文</th>
+              <th>タグ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= image_tag post.user.get_profile_image(100, 100) %></td>
+                <td><%= post.user.name %></td>
+                <td><%= link_to post.title, post_path(post) %></td>
+                <td><%= post.body %></td>
+                <td>
+                  <% post.tags.each do |tag| %>
+                    <%= link_to tag_posts_path(tag_id: tag.id) do %>
+                      <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
 
-    <% record.tags.each do |tag| %>
-      <%= link_to tag_posts_path(tag_id: tag.id) do %>
-        <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
+      <% elsif @model == 'cupping_note' %>
+        <h3>cupping_notes search for "<%= @content %>"</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>プロフィール画像</th>
+              <th>投稿者名</th>
+              <th>サンプル名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cupping_note.each do |cupping_note| %>
+              <% if cupping_note.image.present? %>
+                <tr>
+                  <td><%= image_tag cupping_note.user.get_profile_image(100, 100) %></td>
+                  <td><%= cupping_note.user.name %></td>
+                  <td><%= link_to cupping_note.sample_name %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= image_tag user.get_profile_image(50, 50) %></td>
+            <td><%= user.name %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
+</div>
 
-<% elsif @model == 'cupping_note' %>
-    <h3>cupping_notes search for "<%= @content %>"</h3>
-  <% @cupping_note.each do |cupping_note| %>
-    <% if cupping_note.image.present? %>
-    <%= image_tag post.user.get_profile_image(100,100) %>
-    <%= cupping_note.user.name %>
-    <%= link_to cupping_note.sample_name %>
-    <% end %>
-  <% end%>
-<% end %>

@@ -9,9 +9,11 @@ class Public::SearchesController < ApplicationController
     
     # 選択したモデルに応じて検索を実行
     if @model  == "post"
-      @records = Post.search_for(@content, @method)
+      @posts = Post.search_for(@content, @method)
+    elsif @model == "cupping_note"
+      @cupping_note = CuppingNote.search_for(@content, @method)
     else
-      @records = CuppingNote.search_for(@content, @method)
+      @users = User.search_for(@content, @method)
     end
   end
 end
