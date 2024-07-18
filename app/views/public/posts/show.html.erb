@@ -42,12 +42,11 @@
   <%= f.submit "コメントする" %>
   <% end %>
 </div>
-<% if flash[:notice] %>
+<% if flash[:notice] && !session[:guest] %>
   <div class="alert alert-success">
     <%= flash[:notice] %>
   </div>
-<% end %>
-<% if flash[:alert] %>
+<% elsif flash[:alert] %>
   <div class="alert alert-danger">
     <%= flash[:alert] %>
   </div>

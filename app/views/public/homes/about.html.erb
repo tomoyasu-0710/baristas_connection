@@ -1,6 +1,11 @@
 
 <main>
   <div class="container">
+    <% if flash[:notice].present? %>
+      <div class="alert alert-success mb-4">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
     <div class="row">
       <h1 class="px-5 mx-auto">
         ようこそ、baristas connectionへ!!<br>

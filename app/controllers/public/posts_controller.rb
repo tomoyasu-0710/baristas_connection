@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  
+  before_action :set_guest_session, only: [:show]
 
   def new
     @post = current_user.posts.new
@@ -84,4 +86,9 @@ class Public::PostsController < ApplicationController
     end
     end
   end
+  
+  def set_guest_session
+    session[:guest] = true
+  end
+  
 end
