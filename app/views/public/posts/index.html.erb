@@ -10,25 +10,43 @@
   <% end %>
 </div>
 
-<div>
-  <% @posts.each do |post| %>
-    <% if post.image.present? %>
-      <%= image_tag post.user.get_profile_image(100, 100) %>
-      <%= post.user.name %>
-      <%= link_to post.title, post_path(post) %>
-      <%= post.body %>
-      <%= image_tag post.get_image %>
-    <% else %>
-      <%= image_tag post.user.get_profile_image(100, 100) %>
-      <%= post.user.name %>
-      <%= link_to post.title, post_path(post) %>
-      <%= post.body %>
-    <% end %>
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>名前</th>
+          <th>タイトル</th>
+          <th>投稿文</th>
+          <th>画像</th>
+          <th>タグ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <% if post.image.present? %>
+              <td><%= image_tag post.user.get_profile_image(100, 100) %></td>
+              <td><%= post.user.name %></td>
+              <td><%= link_to post.title, post_path(post) %></td>
+              <td><%= post.body %></td>
+              <td><%= image_tag post.get_image %></td>
+            <% else %>
+              <td><%= image_tag post.user.get_profile_image(100, 100) %></td>
+              <td><%= post.user.name %></td>
+              <td><%= link_to post.title, post_path(post) %></td>
+              <td><%= post.body %></td>
+            <% end %>
 
-    <% post.tags.each do |tag| %>
-      <%= link_to tag_posts_path(tag_id: tag.id) do %>
-        <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
-      <% end %>
-    <% end %>
-  <% end %>
+            <% post.tags.each do |tag| %>
+              <td><%= link_to tag_posts_path(tag_id: tag.id) do %>
+                <i class="fa-solid fa-tag"><%= tag.tag_name %></i>
+              <% end %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

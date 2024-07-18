@@ -1,5 +1,24 @@
-userの投稿一覧
-<% @posts.each do |post| %>
-  <p><%=link_to post.title, post_path(post) %></p>
-  <p><%= post.body %></p>
-<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mt-5 offset-md-1">
+      <h2>Userの投稿一覧</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>タイトル</th>
+            <th>投稿文</th>
+          </tr>
+          <tbody>
+            <% @posts.each do |post| %>
+            <tr>
+              <td><%=link_to post.title, post_path(post) %></td>
+              <td><%= post.body %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>

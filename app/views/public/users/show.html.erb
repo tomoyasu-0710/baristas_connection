@@ -1,12 +1,39 @@
 <h1>マイページ</h1>
 
-<div>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <%= @user.name %>
-  <h3>自己紹介</h3>
-  <%= @user.introduction %>
-  <%= link_to "プロフィール編集", edit_user_path(@user) %>
-</div>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 mt-5">
+        <h2>User</h2>
+        <%= image_tag @user.get_profile_image(100,100) %>
+        <table class="table">
+          <tr></tr>
+          <tr>
+            <th>名前</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>自己紹介</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+        </table>
+        <div class="row">
+          <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
+            <i class="fa-solid fa-user-gear"></i>
+            編集
+          <% end %>
+        </div>
+      </div>
+      <div class="link-container col-6">
+        <div class="row">
+          <%= link_to "userの投稿一覧", user_posts_path(@user), class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+        <div class="row mt-5">
+          <%= link_to "userのいいね一覧", user_likes_path(@user), class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
-<%= link_to "userの投稿一覧", user_posts_path(@user) %>
-<%= link_to "userのいいね一覧", user_likes_path(@user) %>
+

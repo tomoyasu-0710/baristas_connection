@@ -1,30 +1,45 @@
 <h1>TOP</h1>
 <main>
-  <h2>User info</h2>
-  <div>
-    <%= image_tag @user.get_profile_image(100,100) %>
-    <h3>name　<%= @user.name %></h3>　
-    
-    <h4>introduction</h4>
-    <%= @user.introduction %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 mt-5">
+        <h2>User</h2>
+        <%= image_tag @user.get_profile_image(100,100) %>
+        <table class="table">
+          <tr></tr>
+          <tr>
+            <th>名前</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>自己紹介</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+        </table>
+        <div class="row">
+          <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
+            <i class="fa-solid fa-user-gear"></i>
+            編集
+          <% end %>
+        </div>
+      </div>
+      <div class="link-container col-6">
+        <div class="row mt-3">
+          <%= link_to "新規投稿", new_post_path, class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+        <div class="row mt-3">
+          <%= link_to "カッピングノート作成", new_cupping_note_path, class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+        <div class="row mt-3">
+          <%= link_to "投稿一覧", posts_path, class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+        <div class="row mt-3">
+          <%= link_to "グループ", groups_path, class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+        <div class="row mt-3">
+          <%= link_to "カッピングノート", cupping_notes_path, class: "btn btn-dark btn-lg btn-block" %>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div>
-    <%= link_to "新規投稿", new_post_path %>
-  </div>
-  <div>
-    <%= link_to "カッピングノート作成", new_cupping_note_path %>
-  </div>
-  <div>
-    <%= link_to "投稿一覧", posts_path %>
-  </div>
-  <div>
-    <%= link_to "グループ", groups_path %>
-  </div>
-  <div>
-    <%= link_to "カッピングノート", cupping_notes_path %>
-  </div>
- 
-  
 </main>

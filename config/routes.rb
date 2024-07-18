@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     end
     resources :likes, only: [:create, :destroy]
     resources :groups do
+      resource :group_users, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
     resources :users do
